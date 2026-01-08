@@ -35,6 +35,9 @@ namespace McpManager.Infrastructure.Migrations
                     b.Property<long>("DownloadCount")
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime?>("DownloadsLastUpdated")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("FetchedAt")
                         .HasColumnType("TEXT");
 
