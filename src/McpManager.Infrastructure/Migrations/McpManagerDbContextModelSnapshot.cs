@@ -15,7 +15,7 @@ namespace McpManager.Infrastructure.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "10.0.1");
+            modelBuilder.HasAnnotation("ProductVersion", "10.0.5");
 
             modelBuilder.Entity("McpManager.Infrastructure.Persistence.Entities.CachedRegistryServerEntity", b =>
                 {
@@ -93,6 +93,40 @@ namespace McpManager.Infrastructure.Migrations
                     b.HasIndex("RegistryName", "ServerId");
 
                     b.ToTable("CachedRegistryServers");
+                });
+
+            modelBuilder.Entity("McpManager.Infrastructure.Persistence.Entities.HealthCheckEntity", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CheckedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ErrorMessage")
+                        .HasMaxLength(2000)
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsHealthy")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("ResponseTimeMs")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ServerId")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CheckedAt");
+
+                    b.HasIndex("ServerId");
+
+                    b.HasIndex("ServerId", "CheckedAt");
+
+                    b.ToTable("HealthChecks");
                 });
 
             modelBuilder.Entity("McpManager.Infrastructure.Persistence.Entities.InstalledServerEntity", b =>
